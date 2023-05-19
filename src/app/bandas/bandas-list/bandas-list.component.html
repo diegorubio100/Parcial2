@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bandas Musicales</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 70% 30%;
+      max-width: 1200px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+    .table-container {
+      margin-right: 20px;
+    }
+    .detail-container {
+      margin-left: 20px;
+    }
+    .table {
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    .table thead th {
+      background-color: #343a40;
+      color: #fff;
+    }
+    .table tbody td {
+      background-color: #fff;
+    }
+    .table tbody tr:hover {
+      background-color: #f2f2f2;
+      cursor: pointer;
+    }
+    .detail-container {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .detail-container h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .table tbody tr:hover td:nth-child(2) {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Bandas Musicales</h1>
+  </div>
+  <div class="container">
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Pais</th>
+            <th>Genero</th>
+            <th>Fundación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of bandas" (click)="onSelected(b)">
+            <td>{{ b.id }}</td>
+            <td>{{ b.name }}</td>
+            <td>{{ b.country }}</td>
+            <td>{{ b.genre }}</td>
+            <td>{{ b.foundation_year }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="bandaMasAntigua">
+        La banda más antigua es <b>{{ bandaMasAntigua.name }}</b> y fue fundada hace <b>{{ aniosFundacion(bandaMasAntigua.foundation_year) }}</b> años.
+      </p>
+    </div>
+    <div class="detail-container" *ngIf="selectedBanda">
+      <app-bandas-detail [banda]="selectedBanda"></app-bandas-detail>
+    </div>
+  </div>
+</body>
+</html>
